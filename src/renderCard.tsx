@@ -303,6 +303,8 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                     activity.assets && activity.assets.large_image
                                         ? `
                                     <img src="data:image/png;base64,${await encodeBase64(
+                                        activity.assets.large_image.startsWith("mp:external/") ?
+                                        `https://media.discordapp.net/external/${activity.assets.large_image.replace("mp:external/", "")}` :
                                         `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.webp`
                                     )}"
                                     style="
@@ -327,6 +329,8 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                     activity.assets && activity.assets.small_image
                                         ? `
                                     <img src="data:image/png;base64,${await encodeBase64(
+                                        activity.assets.small_image.startsWith("mp:external/") ?
+                                        `https://media.discordapp.net/external/${activity.assets.small_image.replace("mp:external/", "")}` :
                                         `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.small_image}.webp`
                                     )}"
                                     style="
@@ -370,7 +374,7 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                             text-overflow: ellipsis;
                                             height: 15px;
                                             margin: 7px 0;
-                                        ">${escape(activity.assets.large_image)}</p>`
+                                        ">${escape(activity.details)}</p>`
                                             : ``
                                     }
                                     ${
