@@ -226,9 +226,12 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
     }
                                     </h1>
 
-                                    ${hideBadges == "true" ? '' : flags
-                                        .map(
-                                            v => `
+                                    ${
+                                        hideBadges == "true"
+                                            ? ""
+                                            : flags
+                                                  .map(
+                                                      v => `
                                         <img src="data:image/png;base64,${Badges[v]}" style="
                                             width: 20px;
                                             height: 20px;
@@ -237,8 +240,9 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                             transform: translate(0%, -50%);
                                             margin: 0 0 0 4px;
                                         " />`
-                                        )
-                                        .join("")}
+                                                  )
+                                                  .join("")
+                                    }
                                 </div>
                                 ${
                                     userStatus.length > 0 && hideStatus !== "true"
@@ -354,7 +358,7 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                         text-overflow: ellipsis;
                                         height: 15px;
                                         margin: 7px 0;
-                                    ">${activity.name}</p>
+                                    ">${escape(activity.name)}</p>
                                     ${
                                         activity.details
                                             ? `
@@ -366,7 +370,7 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                             text-overflow: ellipsis;
                                             height: 15px;
                                             margin: 7px 0;
-                                        ">${activity.details}</p>`
+                                        ">${escape(activity.details)}</p>`
                                             : ``
                                     }
                                     ${
@@ -380,7 +384,7 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                             text-overflow: ellipsis;
                                             height: 15px;
                                             margin: 7px 0;
-                                        ">${activity.state}${
+                                        ">${escape(activity.state)}${
                                                   activity.party && activity.party.size
                                                       ? ` (${activity.party.size[0]} of ${activity.party.size[1]})`
                                                       : ""
@@ -420,6 +424,7 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
 
             ${
                 body.data.listening_to_spotify === true &&
+                !activity &&
                 body.data.activities[Object.keys(body.data.activities).length - 1].type === 2
                     ? `
                 <div style="
