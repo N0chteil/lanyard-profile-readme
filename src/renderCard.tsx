@@ -300,7 +300,6 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                     height: auto;
                                 ">
                                 ${
-                                    console.log(activity.assets.large_image),
                                     activity.assets && activity.assets.large_image
                                         ? `
                                     <img src="data:image/png;base64,${await encodeBase64(
@@ -371,7 +370,7 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                             text-overflow: ellipsis;
                                             height: 15px;
                                             margin: 7px 0;
-                                        ">${escape(activity.details)}</p>`
+                                        ">${escape(activity.assets.large_image)}</p>`
                                             : ``
                                     }
                                     ${
