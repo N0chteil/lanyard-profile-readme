@@ -300,6 +300,7 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                     height: auto;
                                 ">
                                 ${
+                                    console.log(activity.assets.large_image),
                                     activity.assets && activity.assets.large_image
                                         ? `
                                     <img src="data:image/png;base64,${await encodeBase64(
