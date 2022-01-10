@@ -396,7 +396,7 @@ const renderCard = async (body: LanyardTypes.Root, params: Parameters): Promise<
                                             : ``
                                     }
                                     ${
-                                        activity.timestamps && activity.timestamps.start && hideTimestamp !== "true"
+                                        activity.timestamps && activity.timestamps.start && !activity.timestamps.end && hideTimestamp !== "true"
                                             ? `
                                         <p style="
                                             color: ${theme === "dark" ? "#ccc" : "#777"};
